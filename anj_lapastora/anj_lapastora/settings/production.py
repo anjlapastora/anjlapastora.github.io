@@ -26,4 +26,4 @@ SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-WAGTAILADMIN_BASE_URL = "https://your-app.onrender.com"
+WAGTAILADMIN_BASE_URL = "https://anj_lapastora.onrender.com"
