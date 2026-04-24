@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+{% block content %}
+
+<div class="gallery" id="gallery">
+    {% for photo in photos %}
+        <div class="item">
+            {% image photo.photo original %}
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+Django>=5.2,<5.3
+wagtail>=7.3,<7.4
+gunicorn
+psycopg2-binary
+whitenoise
+dj-database-url
+wagtail-favicon
+wagtail-markdown
+pillow
+pygments
+django-storages
+boto3

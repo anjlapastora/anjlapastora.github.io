@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Tech{% endblock %}
+
+{% block content %}
+
+<main class="blog-container fade-in">
+
+    {% for post in posts %}
+    <article class="card">
+
+        {% if post.main_image %}
+        {% image post.main_image fill-800x500 as img %}
+        <img src="{{ img.url }}" alt="{{ post.title }}">
+        {% endif %}
+
+        <p class="date">
+            {{ post.date|date:"n/j/y" }}
+        </p>
+
+        <h2>
+            <a href="{% pageurl post %}">
+                {{ post.title }}
+            </a>
+        </h2>
+
+        <p class="excerpt">
+            {{ post.intro|truncatewords:20 }}
+        </p>
+
+        <a href="{% pageurl post %}" class="read-more">
+            Read More
+        </a>
+
+    </article>
+    {% endfor %}
+</main>
+    <div class="pagination fade-in">
+
+        {% if posts.has_previous %}
+        <a href="?page={{ posts.previous_page_number }}">← Prev</a>
+        {% endif %}
+
+        <span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+
+        {% if posts.has_next %}
+        <a href="?page={{ posts.next_page_number }}">Next →</a>
+        {% endif %}
+
+    </div>
+{% endblock %}
