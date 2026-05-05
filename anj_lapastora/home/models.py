@@ -1,6 +1,7 @@
 from django.db import models
 from wagtail.models import Page
 from wagtail.fields import RichTextField
+from wagtail.images import get_image_model_string
 from wagtail.admin.panels import FieldPanel
 from wagtailmarkdown.fields import MarkdownField
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -13,6 +14,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 #               MusingsPostPage
 #         AtelierPage
 #               PhotoPage
+#         AboutPage
 
 
 class HomePage(Page):
@@ -157,4 +159,36 @@ class PhotoPage(Page):
         FieldPanel("photo"),
         FieldPanel("caption"),
         FieldPanel("description"),
+    ]
+
+
+class AboutPage(Page):
+    about_left = models.ForeignKey(
+        get_image_model_string(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    about_right = models.ForeignKey(
+        get_image_model_string(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    about_bottom = models.ForeignKey(
+        get_image_model_string(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("about_left"),
+        FieldPanel("about_right"),
+        FieldPanel("about_bottom"),
     ]
