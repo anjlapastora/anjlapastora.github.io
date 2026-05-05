@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<main class="blog-container fade-in">
+<div class="blog-container fade-in">
 
     {% for post in posts %}
     <article class="card">
@@ -35,7 +35,7 @@
 
     </article>
     {% endfor %}
-</main>
+</div>
 <div class="pagination fade-in">
 
     {% if posts.has_previous %}

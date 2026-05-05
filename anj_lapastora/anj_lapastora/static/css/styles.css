@@ -1,63 +1,68 @@
-
 html {
   scroll-behavior: smooth;
-} 
+}
 
 body {
-    padding: 0;
-    background: #f3f3f3;
-    color: #333;
-    font-family: 'Instrument Serif Regular', serif;
-    margin-left: 100px;
-    margin-right: 100px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: 100px;
+  margin-right: 100px;
+  background: #f3f3f3;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 
 @media (max-width: 600px) {
   body {
     margin-left: 30px;
     margin-right: 30px;
-}
   }
+}
 
 
 img {
   pointer-events: none;
-  -webkit-touch-callout: none; /* Disables long-press menu on iOS */
-}
-
-.site-footer {
-    text-align: center;
-    padding: 60px 20px;
-    background: #333;
-    color: #fff;
-}
-
-/* CLEAN fade-in system */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 1s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+  -webkit-touch-callout: none;
+  /* Disables long-press menu on iOS */
 }
 
 /* Footer styles -- START */
-.footer-symbols {
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+.site-footer {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 20px 0 40px 0;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
 }
 
-.footer a {
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
+.site-footer.fade-in.visible {
+  opacity: 0.8 !important;
+  transform: translateY(0);
 }
 
-footer {
-  color: #333;
+/* Footer styles -- END */
+
+/* CLEAN fade-in system */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 a:link {
@@ -83,7 +88,6 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
-/* Footer styles -- END */
 
 
 /* Header styles -- START */
@@ -121,7 +125,7 @@ a:active {
   text-decoration: none;
   color: #A74d4a;
   font-family: 'Cousine', monospace;
-  padding: 0 1px; /* smaller horizontal padding */
+  padding: 0 1px;
   font-size: 14.9632px
 }
 
@@ -217,7 +221,7 @@ a:active {
 
 .no-scroll {
   overflow: hidden;
-} 
+}
 
 @media (max-width: 600px) {
   .burger {
@@ -260,7 +264,7 @@ a:active {
     justify-content: center;
     align-items: center;
     gap: 25px;
-    transition: opacity 1.5s ease-in-out 0.5s; 
+    transition: opacity 1.5s ease-in-out 0.5s;
     z-index: 1050;
     padding-left: 0px;
     padding-top: 0px;
@@ -290,6 +294,7 @@ a:active {
   }
 
 }
+
 /* Header styles -- END */
 
 /* About page style -- START */
@@ -325,21 +330,21 @@ a:active {
 
 /* layout control */
 .about-images-grid-container img:nth-child(1) {
-    transform: translate(12px, -20px);
-    grid-column: span 4;
-    grid-row: span 4;
+  transform: translate(12px, -20px);
+  grid-column: span 4;
+  grid-row: span 4;
 }
 
 .about-images-grid-container img:nth-child(2) {
-    transform: translate(0px, 4px);
-    grid-column: span 4;
-    grid-row: span 2;
+  transform: translate(0px, 4px);
+  grid-column: span 4;
+  grid-row: span 2;
 }
 
 .about-images-grid-container img:nth-child(3) {
-    transform: translate(110px, -70px);
-    grid-column: span 7;
-    grid-row: span 3;
+  transform: translate(110px, -70px);
+  grid-column: span 7;
+  grid-row: span 3;
 }
 
 /* TABLETS (iPad, small laptops) */
@@ -369,172 +374,204 @@ a:active {
     height: auto;
     transform: none;
   }
+
   .about-images-grid-container img:nth-child(1) {
     transform: none;
   }
 
   .about-images-grid-container img:nth-child(2) {
-      transform: none;
+    transform: none;
   }
 
   .about-images-grid-container img:nth-child(3) {
-      transform: none;
+    transform: none;
   }
 }
+
 /* About page style -- END */
 
 
 /* Atelier page style -- START */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-auto-rows: 80px;
-    gap: 16px;
-    padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-rows: 80px;
+  gap: 16px;
+  padding: 40px;
 }
 
 .item {
-    overflow: hidden;
-    border-radius: 8px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease;
+  overflow: hidden;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
 }
 
 .item.visible {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease, opacity 0.6s ease;
-    opacity: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+  opacity: 0;
 }
 
 .item img.loaded {
-    opacity: 1;
+  opacity: 1;
 }
 
 .item:hover img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
-.span-1x2 { grid-column: span 1; grid-row: span 2; }
-.span-2x3 { grid-column: span 2; grid-row: span 3; }
-.span-2x4 { grid-column: span 2; grid-row: span 4; }
-.span-3x3 { grid-column: span 3; grid-row: span 3; }
-.span-3x4 { grid-column: span 3; grid-row: span 4; }
-.span-4x5 { grid-column: span 4; grid-row: span 5; }
+.span-1x2 {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.span-2x3 {
+  grid-column: span 2;
+  grid-row: span 3;
+}
+
+.span-2x4 {
+  grid-column: span 2;
+  grid-row: span 4;
+}
+
+.span-3x3 {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+
+.span-3x4 {
+  grid-column: span 3;
+  grid-row: span 4;
+}
+
+.span-4x5 {
+  grid-column: span 4;
+  grid-row: span 5;
+}
+
 /* Atelier Page style -- END */
 
 
 /* Musings Page Style -- START */
 /* BLOG GRID */
 .blog-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 60px 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 40px;
+  flex-grow: 1;
 }
 
 /* CARD */
 .card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    margin-bottom: 15px;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  margin-bottom: 15px;
 }
 
 .date {
-    font-size: 12px;
-    margin-bottom: 10px;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 .card h2 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 28px;
-    margin-bottom: 10px;
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  margin-bottom: 10px;
 }
 
 .excerpt {
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 12px;
 }
 
 .read-more {
-    font-size: 13px;
-    color: #A74d4a;
-    text-decoration: underline;
+  font-size: 13px;
+  color: #A74d4a;
+  text-decoration: underline;
 }
 
 .pagination {
-    margin-top: 60px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 14px;
+  margin-top: 40px;
+  /* Space after the blog posts */
+  margin-bottom: 10px;
+  /* Small gap before the footer */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .pagination a {
-    color: #A74d4a;
-    text-decoration: none;
+  color: #A74d4a;
+  text-decoration: none;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .blog-container {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
+  .blog-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-    .card img {
-        height: 220px;
-    }
+  .card img {
+    height: 220px;
+  }
 }
+
 /* Musings Page Style -- END */
 
 /* Musings Post Page Style -- START */
 pre {
-    background: #FAFAFA;
-    color: #1e1e1e;
-    padding: 15px;
-    overflow-x: auto;
+  background: #FAFAFA;
+  color: #1e1e1e;
+  padding: 15px;
+  overflow-x: auto;
 }
 
 code {
-    font-family: monospace;
+  font-family: monospace;
 }
 
 .blog-body {
-    line-height: 1.7;
-    padding: 40px;
+  line-height: 1.7;
+  padding: 40px;
 }
 
 .blog-body h1,
 .blog-body h2,
 .blog-body h3 {
-    font-family: 'Instrument Serif', serif;
-    margin: 20px 0 10px;
+  font-family: 'Instrument Serif', serif;
+  margin: 20px 0 10px;
 }
 
 .blog-body p {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .blog-body pre {
-    padding: 16px;
-    overflow-x: auto;
-    border-left: 2px solid gray;
+  padding: 16px;
+  overflow-x: auto;
+  border-left: 2px solid gray;
 }
 
 .blog-body code {
-    background: #FAFAFA;
-    padding: 2px 4px;
+  background: #FAFAFA;
+  padding: 2px 4px;
 }
+
 /* Musings Post Page Style -- END */

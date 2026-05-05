@@ -30,7 +30,12 @@
     </div>
   </div>
 
-</body>
-</html>
+  {% block extra_css %}
+  <style>
+    .site-footer {
+      display: none !important;
+    }
+  </style>
+  {% endblock %}
 
 {% endblock %}
