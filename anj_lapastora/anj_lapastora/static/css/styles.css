@@ -293,6 +293,10 @@ a:active {
     gap: 20px;
   }
 
+  .site-header {
+    padding: 0px 24px;
+  }
+
 }
 
 /* Header styles -- END */
