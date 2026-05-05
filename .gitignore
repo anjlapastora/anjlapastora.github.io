@@ -20,4 +20,5 @@ staticfiles/
 
 # Logs
 *.log
-anj_lapastora/anj_lapastora/settings/dev.py
+*/dev.py
+*/local.py
