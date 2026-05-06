@@ -2,14 +2,14 @@
 {% load wagtailimages_tags %}
 
 {% block content %}
-
 <div class="gallery" id="gallery">
     {% for photo in photos %}
-        <div class="item">
-            {% image photo.photo original %}
-        </div>
+    <div class="item">
+        {# Using 'width-1000' is faster than 'original' for galleries #}
+        {% image photo.photo width-1000 %}
+    </div>
     {% endfor %}
 </div>
 
-
+<div id="sentinel"></div>
 {% endblock %}

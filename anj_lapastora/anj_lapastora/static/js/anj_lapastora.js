@@ -15,11 +15,13 @@ const CONFIG = {
         "span-3x4",
         "span-2x4",
         "span-4x5",
-        "span-2x3",
         "span-3x3",
-        "span-1x2"
     ],
-    scrollOffset: 200
+    scrollOffset: 200,
+    ratios: {
+        portrait: { width: "420px", aspect: "4/5" },
+        landscape: { width: "480px", aspect: "3/2" }
+    }
 };
 
 // ==============================
@@ -93,24 +95,32 @@ const Fade = (() => {
 const Layout = (() => {
 
     function reveal(item, img, index) {
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             img.classList.add("loaded");
             item.classList.add("visible");
-        }, index * 60);
+        });
+    }
+
+    function processItem(item, img, index) {
+        const isPortrait = img.naturalHeight > img.naturalWidth;
+        const type = isPortrait ? 'portrait' : 'landscape';
+        item.classList.add(type);
+
+        const mt = Math.floor(Math.random() * 120 + 30); 
+
+        item.style.marginTop = `${mt}px`;
+        reveal(item, img, index);
     }
 
     function apply(items) {
         items.forEach((item, index) => {
-            const layout = CONFIG.layouts[Math.floor(Math.random() * CONFIG.layouts.length)];
-            item.classList.add(layout);
-
             const img = $("img", item);
             if (!img) return;
 
             if (img.complete) {
-                reveal(item, img, index);
+                processItem(item, img, index);
             } else {
-                img.onload = () => reveal(item, img, index);
+                img.onload = () => processItem(item, img, index);
             }
         });
     }
@@ -118,49 +128,6 @@ const Layout = (() => {
     return { apply };
 })();
 
-// ==============================
-// INFINITE SCROLL MODULE
-// ==============================
-const InfiniteScroll = (() => {
-
-    function shouldLoad() {
-        return window.innerHeight + window.scrollY >= document.body.offsetHeight - CONFIG.scrollOffset;
-    }
-
-    function load() {
-        if (state.loading || !state.hasNext || !shouldLoad()) return;
-
-        state.loading = true;
-
-        fetch(`?page=${state.page}`)
-            .then(res => res.text())
-            .then(html => {
-                const doc = new DOMParser().parseFromString(html, "text/html");
-                const newItems = $$(CONFIG.selectors.galleryItems, doc);
-
-                if (!newItems.length) {
-                    state.hasNext = false;
-                    return;
-                }
-
-                const gallery = $(CONFIG.selectors.gallery);
-                newItems.forEach(item => gallery.appendChild(item));
-
-                Layout.apply(newItems);
-
-                state.page++;
-            })
-            .finally(() => {
-                state.loading = false;
-            });
-    }
-
-    function init() {
-        window.addEventListener("scroll", load);
-    }
-
-    return { init };
-})();
 
 // ==============================
 // UI MODULE (BURGER MENU)
@@ -219,7 +186,6 @@ function init() {
 
     Layout.apply(items);
     Fade.init();
-    InfiniteScroll.init();
     UI.init();
 }
 

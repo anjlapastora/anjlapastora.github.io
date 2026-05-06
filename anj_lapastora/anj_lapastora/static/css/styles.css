@@ -30,6 +30,15 @@ main {
   }
 }
 
+.title {
+  color: #A74d4a;
+  font-family: 'Instrument Serif', serif;
+  letter-spacing: -.03em;
+  font-size: clamp(50px, 12vw, 110px);
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1;
+}
 
 img {
   pointer-events: none;
@@ -397,11 +406,18 @@ a:active {
 
 /* Atelier page style -- START */
 .gallery {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(8, 1fr);
   grid-auto-rows: 80px;
   gap: 16px;
   padding: 40px;
+  justify-content: center;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 80px 40px;
+  margin: 0 auto;
+  padding: 100px 0;
 }
 
 .item {
@@ -410,7 +426,68 @@ a:active {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease;
+  flex-basis: 400px;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
+
+.item.portrait {
+  flex-basis: 420px;
+}
+
+.item.landscape {
+  flex-basis: 480px;
+}
+
+.item.portrait img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.item.landscape img {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+
+  .item.portrait {
+    flex-basis: 400px;
+  }
+
+  .item.landscape {
+    flex-basis: 550px;
+    max-width: 600px;
+  }
+}
+
+.item.landscape img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 1024px) {
+  .item.landscape {
+    transition-duration: 1.8s;
+  }
+}
+
 
 .item.visible {
   opacity: 1;
