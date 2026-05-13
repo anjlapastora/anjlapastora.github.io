@@ -71,3 +71,10 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+# -------------------------
+# Higher text/form submission
+# -------------------------
+DATA_UPLOAD_MAX_MEMORY_SIZE = 26214400
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 26214400
