@@ -633,15 +633,30 @@ code {
   padding: 40px;
 }
 
-.blog-body h1,
-.blog-body h2,
-.blog-body h3 {
+.blog-body h1 {
+  font-size: xxx-large;
   font-family: 'Instrument Serif', serif;
   margin: 20px 0 10px;
+  letter-spacing: -.03em;
+  font-weight: 400;
+}
+
+.blog-body h2,
+.blog-body h3 {
+  font-family: 'Cousine', monospace;
+  margin: 20px 0 10px;
+  letter-spacing: -.03em;
+  font-weight: 400;
 }
 
 .blog-body p {
   margin-bottom: 16px;
+  font-family: 'Cousine', monospace
+}
+
+.blog-body li {
+  margin-bottom: 10px;
+  font-family: 'Cousine', monospace
 }
 
 .blog-body pre {
