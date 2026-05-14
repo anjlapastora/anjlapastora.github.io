@@ -571,8 +571,10 @@ a:active {
 
 .card h2 {
   font-family: 'Instrument Serif', serif;
-  font-size: 28px;
-  margin-bottom: 10px;
+  font-size: xx-large;
+  margin: 20px 0 10px;
+  letter-spacing: -.03em;
+  font-weight: 400;
 }
 
 .excerpt {
