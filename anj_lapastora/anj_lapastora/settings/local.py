@@ -37,7 +37,6 @@ WAGTAILADMIN_BASE_URL = "http://127.0.0.1:8000"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
-
 # -------------------------
 # Django 4+ storage config
 # -------------------------
@@ -49,3 +48,16 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+# # -------------------------
+# # Wagtail Markdown Extension
+# # -------------------------
+# WAGTAILMARKDOWN = {
+#     "extensions": ["codehilite"],
+#     "extension_configs": {
+#         "codehilite": {
+#             "css_class": "highlight",
+#             "linenums": False,  # Set to True for line numbers
+#         }
+#     },
+# }

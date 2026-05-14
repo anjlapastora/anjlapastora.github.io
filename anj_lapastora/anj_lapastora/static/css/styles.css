@@ -680,6 +680,17 @@ th {
   padding: 10px 10px;
 }
 
+.blog-body pre,
+.blog-body code {
+  text-align: left !important;
+  white-space: pre !important;
+}
+
+.blog-body pre code span:first-child {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
 .blog-body thead {
   background: #ECECEC;
 }

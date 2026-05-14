@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "taggit",
 ]
 
-"id: fix"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -85,7 +84,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "anj_lapastora.wsgi.application"
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -155,3 +153,16 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# -------------------------
+# Wagtail Markdown Extension
+# -------------------------
+WAGTAILMARKDOWN = {
+    "extensions": ["codehilite"],
+    "extension_configs": {
+        "codehilite": {
+            "css_class": "highlight",
+            "linenums": True,
+        }
+    },
+}
