@@ -10,3 +10,4 @@ Website: [Anj Lapastora's Website](https://angelicalapastora.com).
 - HTML
 - CSS
 
+*For more details on the setup you may visit this [page](https://www.angelicalapastora.com/tech/how-to-set-up-my-wagtail-project/).*
