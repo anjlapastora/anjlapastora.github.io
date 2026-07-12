@@ -1,52 +1,25 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailmarkdown %}
 
 {% block title %}Tech{% endblock %}
 
 {% block content %}
 
-<div class="blog-container fade-in">
-
-    {% for post in posts %}
-    <article class="card">
-
-        {% if post.main_image %}
-        {% image post.main_image fill-800x500 as img %}
-        <img src="{{ img.url }}" alt="{{ post.title }}">
-        {% endif %}
-
-        <p class="date">
-            {{ post.date|date:"n/j/y" }}
-        </p>
-
-        <h2>
-            <a href="{% pageurl post %}">
-                {{ post.title }}
-            </a>
-        </h2>
-
-        <p class="excerpt">
-            {{ post.intro|truncatewords:20 }}
-        </p>
-
-        <a href="{% pageurl post %}" class="read-more">
-            Read More
-        </a>
-
-    </article>
-    {% endfor %}
+<div class="journal-hero">
+  <div class="section-eyebrow fade-in">notes on tech, written slowly</div>
+  <h1 class="fade-in">tech</h1>
+  <svg viewBox="0 0 680 84" class="section-divider fade-in">
+    <use href="#ovine" filter="url(#wcLine)"></use>
+  </svg>
 </div>
-<div class="pagination fade-in">
 
-    {% if posts.has_previous %}
-    <a href="?page={{ posts.previous_page_number }}">← Prev</a>
-    {% endif %}
-
-    <span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
-
-    {% if posts.has_next %}
-    <a href="?page={{ posts.next_page_number }}">Next →</a>
-    {% endif %}
-
+<div class="maintenance-notice fade-in">
+  <div class="maintenance-icon">
+    <svg viewBox="-70 -85 140 140" style="width:100%; display:block;">
+      <use href="#orchB1" transform="scale(.85)" filter="url(#wcMini)"></use>
+    </svg>
+  </div>
+  <h2>under maintenance</h2>
+  <p>This section is being tended to right now &mdash; check back soon. The tech notes haven't gone anywhere, just tidying up before they're back on display.</p>
 </div>
 {% endblock %}

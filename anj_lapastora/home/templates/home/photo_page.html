@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+
+<div class="photo-header">
+  <a href="/atelier" class="article-back fade-in">&larr; atelier</a>
+  <div class="article-meta fade-in">
+    {% if page.category %}
+    <span class="tag-label">{{ page.get_category_display|upper }}</span>
+    {% endif %}
+    <span class="post-date">{{ page.date_taken|date:"F j, Y" }}</span>
+  </div>
+  <h1 class="fade-in">{{ page.title }}</h1>
+  {% if page.caption %}
+  <p class="article-dek fade-in">{{ page.caption }}</p>
+  {% endif %}
+</div>
+
+{% with prev_page=page.get_prev_sibling next_page=page.get_next_sibling %}
+{% if page.photo %}
+<div class="photo-stage">
+  {% if prev_page.live %}
+  <a href="{% pageurl prev_page %}" class="photo-nav-side fade-in" aria-label="Previous photo">&larr;</a>
+  {% else %}
+  <span class="photo-nav-side placeholder" aria-hidden="true"></span>
+  {% endif %}
+
+  <div class="photo-hero fade-in">
+    {% image page.photo width-1200 as hero_img %}
+    <img src="{{ hero_img.url }}" alt="{{ page.title }}">
+  </div>
+
+  {% if next_page.live %}
+  <a href="{% pageurl next_page %}" class="photo-nav-side fade-in" aria-label="Next photo">&rarr;</a>
+  {% else %}
+  <span class="photo-nav-side placeholder" aria-hidden="true"></span>
+  {% endif %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% if page.description %}
+<div class="blog-body">
+  {{ page.description|richtext }}
+</div>
+{% endif %}
+
+{% endblock %}

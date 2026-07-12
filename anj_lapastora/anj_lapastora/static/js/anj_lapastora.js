@@ -9,19 +9,10 @@ const CONFIG = {
         images: "img",
         burger: "#burger",
         nav: "#mobileNav",
-        menu: ".menu-content"
+        menu: ".menu-content",
+        richText: ".blog-body"
     },
-    layouts: [
-        "span-3x4",
-        "span-2x4",
-        "span-4x5",
-        "span-3x3",
-    ],
-    scrollOffset: 200,
-    ratios: {
-        portrait: { width: "420px", aspect: "4/5" },
-        landscape: { width: "480px", aspect: "3/2" }
-    }
+    scrollOffset: 200
 };
 
 // ==============================
@@ -41,14 +32,29 @@ const $$ = (sel, ctx = document) => ctx.querySelectorAll(sel);
 
 const applyDelay = (el, index = 0) => {
     if (!el.classList.contains("fade-in")) return;
-    const delay = el.dataset.delay || index * 100;
+    const delay = el.dataset.delay || Math.min(index * 90, 360);
     el.style.transitionDelay = `${delay}ms`;
 };
 
 // ==============================
 // FADE-IN MODULE
 // ==============================
+// Reveals elements individually as each one actually enters the
+// viewport, rather than as whole page sections all at once. Elements
+// that cross into view together (e.g. a row of gallery tiles) are
+// given a small staggered delay so they still read as a sequence.
 const Fade = (() => {
+
+    // Markdown-rendered article bodies are a single blob of HTML we
+    // don't control node-by-node, so tag each top-level block (each
+    // paragraph, heading, image, etc.) as its own fade-in target.
+    function prepareRichText() {
+        $$(CONFIG.selectors.richText).forEach(body => {
+            Array.from(body.children).forEach(child => {
+                child.classList.add("fade-in");
+            });
+        });
+    }
 
     function fallback() {
         $$(CONFIG.selectors.items).forEach((item, index) => {
@@ -62,18 +68,20 @@ const Fade = (() => {
     }
 
     function init() {
+        prepareRichText();
+
         const items = $$(CONFIG.selectors.items);
 
         if ("IntersectionObserver" in window) {
             const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-
-                    const el = entry.target;
-                    applyDelay(el);
-                    el.classList.add("visible");
-                    obs.unobserve(el);
-                });
+                entries
+                    .filter(entry => entry.isIntersecting)
+                    .forEach((entry, index) => {
+                        const el = entry.target;
+                        applyDelay(el, index);
+                        el.classList.add("visible");
+                        obs.unobserve(el);
+                    });
             }, {
                 rootMargin: "0px 0px -50px 0px",
                 threshold: 0
@@ -102,13 +110,6 @@ const Layout = (() => {
     }
 
     function processItem(item, img, index) {
-        const isPortrait = img.naturalHeight > img.naturalWidth;
-        const type = isPortrait ? 'portrait' : 'landscape';
-        item.classList.add(type);
-
-        const mt = Math.floor(Math.random() * 120 + 30); 
-
-        item.style.marginTop = `${mt}px`;
         reveal(item, img, index);
     }
 

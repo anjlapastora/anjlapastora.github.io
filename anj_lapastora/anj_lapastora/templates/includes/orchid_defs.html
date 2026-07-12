@@ -1,0 +1,113 @@
+<!-- Shared watercolor orchid motifs, referenced via <use href="#id"> across templates -->
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <filter id="wc1" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="7" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="6"></feDisplacementMap>
+      <feGaussianBlur stdDeviation="0.3"></feGaussianBlur>
+    </filter>
+    <filter id="ws1" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="2" seed="11" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="10"></feDisplacementMap>
+      <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+    </filter>
+    <filter id="wcS1" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.005" numOctaves="2" seed="4" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4"></feDisplacementMap>
+      <feGaussianBlur stdDeviation="0.3"></feGaussianBlur>
+    </filter>
+    <!-- Gentler variant for small icon-sized renders (~100px). The other
+         filters are tuned for 300-500px orchids; at icon scale their
+         displacement/blur amounts are large relative to the shape and
+         read as jagged, broken edges rather than a soft watercolor edge. -->
+    <filter id="wcMini" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="7" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5"></feDisplacementMap>
+      <feGaussianBlur stdDeviation="0.15"></feGaussianBlur>
+    </filter>
+    <!-- Gentler variant for thin stroked lines (e.g. the "ovine" divider's
+         connecting curve). A thin stroke is only 1-1.5px wide, so even
+         wc1's moderate displacement pushes it further than its own width
+         and breaks it into disconnected dashes; this keeps the wobble
+         small enough that the line stays continuous. -->
+    <filter id="wcLine" x="-10%" y="-40%" width="120%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" seed="7" result="n"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.5"></feDisplacementMap>
+      <feGaussianBlur stdDeviation="0.2"></feGaussianBlur>
+    </filter>
+    <g id="orchB1">
+      <g fill="#454a3f" fill-opacity=".4" stroke="none">
+        <path d="M0 -10 C-16 -24 -22 -50 -10 -70 C-6 -77 2 -79 6 -71 C18 -50 14 -24 4 -10 Z"></path>
+        <path d="M-8 -6 C-30 -26 -60 -32 -80 -20 C-92 -12 -90 4 -76 12 C-56 24 -26 18 -6 4 Z"></path>
+        <path d="M8 -6 C30 -26 60 -32 80 -20 C92 -12 90 4 76 12 C56 24 26 18 6 4 Z"></path>
+        <path d="M-6 8 C-24 16 -44 34 -52 58 C-54 66 -46 68 -40 60 C-24 42 -8 24 2 12 Z"></path>
+        <path d="M6 8 C24 16 44 34 52 58 C54 66 46 68 40 60 C24 42 8 24 -2 12 Z"></path>
+        <path d="M-5 6 C-10 14 -9 23 -3 29 C-1 31 1 31 3 29 C9 23 10 14 5 6 Z"></path>
+        <path d="M-2 28 C-3 35 -1 41 0 46 C1 41 3 35 2 28 Z"></path>
+      </g>
+      <g fill="none" stroke="#2b3027" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".7">
+        <path d="M0 -10 C-16 -24 -22 -50 -10 -70 C-6 -77 2 -79 6 -71 C18 -50 14 -24 4 -10 Z" stroke-width="1.2"></path>
+        <path d="M-3 -16 C-9 -36 -9 -52 -3 -64" stroke-width=".8"></path>
+        <path d="M3 -16 C6 -36 7 -50 4 -62" stroke-width=".8"></path>
+        <path d="M-8 -6 C-30 -26 -60 -32 -80 -20 C-92 -12 -90 4 -76 12 C-56 24 -26 18 -6 4 Z" stroke-width="1.2"></path>
+        <path d="M-14 -6 C-36 -16 -58 -18 -74 -12" stroke-width=".8"></path>
+        <path d="M-14 0 C-38 -2 -58 2 -70 6" stroke-width=".8"></path>
+        <path d="M-80 -20 C-92 -26 -100 -24 -106 -16" stroke-width=".9"></path>
+        <path d="M8 -6 C30 -26 60 -32 80 -20 C92 -12 90 4 76 12 C56 24 26 18 6 4 Z" stroke-width="1.2"></path>
+        <path d="M14 -6 C36 -16 58 -18 74 -12" stroke-width=".8"></path>
+        <path d="M14 0 C38 -2 58 2 70 6" stroke-width=".8"></path>
+        <path d="M80 -20 C92 -26 100 -24 106 -16" stroke-width=".9"></path>
+        <path d="M-6 8 C-24 16 -44 34 -52 58 C-54 66 -46 68 -40 60 C-24 42 -8 24 2 12 Z" stroke-width="1.1"></path>
+        <path d="M-8 14 C-24 28 -36 42 -44 56" stroke-width=".8"></path>
+        <path d="M6 8 C24 16 44 34 52 58 C54 66 46 68 40 60 C24 42 8 24 -2 12 Z" stroke-width="1.1"></path>
+        <path d="M8 14 C24 28 36 42 44 56" stroke-width=".8"></path>
+        <path d="M-5 2 C-5 -5 5 -5 6 1 C6 5 3 8 0 8" stroke-width="1"></path>
+        <path d="M-5 6 C-10 14 -9 23 -3 29 C-1 31 1 31 3 29 C9 23 10 14 5 6 Z" stroke-width="1"></path>
+        <path d="M-3 29 C-7 38 -13 44 -21 47" stroke-width=".9"></path>
+        <path d="M3 29 C7 38 13 44 21 47" stroke-width=".9"></path>
+        <circle cx="-2" cy="12" r=".9" fill="#2b3027" stroke="none"></circle>
+        <circle cx="3" cy="15" r=".9" fill="#2b3027" stroke="none"></circle>
+        <circle cx="0" cy="19" r=".8" fill="#2b3027" stroke="none"></circle>
+      </g>
+    </g>
+    <g id="orchBud1">
+      <path d="M0 0 C-8 -6 -10 -16 -4 -24 C4 -18 6 -8 4 0 Z" fill="#454a3f" fill-opacity=".4" stroke="#2b3027" stroke-opacity=".7" stroke-width="1"></path>
+      <path d="M-1 -4 C-3 -10 -3 -16 -1 -20" fill="none" stroke="#2b3027" stroke-opacity=".55" stroke-width=".7"></path>
+    </g>
+    <g id="stem1">
+      <path d="M111 545 C100 470 129 418 171 378 C231 320 291 298 319 230 C333 193 333 148 320 110 C334 150 336 194 321 233 C293 303 234 325 174 382 C135 421 106 473 114 544 Z" fill="#2b3027" fill-opacity=".72" stroke="none"></path>
+      <path d="M114 540 C86 526 54 514 30 480 C58 502 90 520 114 534 Z" fill="#2b3027" fill-opacity=".6" stroke="none"></path>
+      <path d="M118 540 C148 514 176 502 200 476 C172 508 142 526 120 538 Z" fill="#2b3027" fill-opacity=".6" stroke="none"></path>
+      <path d="M116 543 C102 526 94 506 96 486 C100 508 108 526 122 540 Z" fill="#2b3027" fill-opacity=".45" stroke="none"></path>
+      <g fill="none" stroke="#2b3027" stroke-opacity=".58" stroke-width="1.2" stroke-linecap="round">
+        <path d="M118 470 C124 462 128 456 133 450"></path>
+        <path d="M188 362 C194 364 199 367 204 369"></path>
+        <path d="M168 352 C162 342 156 330 151 320"></path>
+        <path d="M298 288 C292 282 287 276 281 272"></path>
+        <path d="M310 220 C292 210 270 198 253 192"></path>
+      </g>
+    </g>
+    <g id="spray1">
+      <use href="#orchB1" transform="translate(135,450) scale(.9) rotate(-15)"></use>
+      <use href="#orchB1" transform="translate(205,370) scale(1.05) rotate(5)"></use>
+      <use href="#orchB1" transform="translate(150,315) scale(.8) rotate(-18)"></use>
+      <use href="#orchB1" transform="translate(280,270) scale(.95) rotate(14)"></use>
+      <use href="#orchB1" transform="translate(250,190) scale(.7) rotate(-6)"></use>
+      <use href="#orchBud1" transform="translate(316,144) rotate(20)"></use>
+      <use href="#orchBud1" transform="translate(324,116) rotate(38) scale(.75)"></use>
+    </g>
+    <g id="ovine">
+      <path d="M20 46 C120 30 230 58 340 42 C450 26 560 54 660 38" fill="none" stroke="#2b3027" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"></path>
+      <path d="M20 46 C10 44 4 40 0 34 C8 38 15 41 22 42 Z" fill="#2b3027" fill-opacity=".5" stroke="none"></path>
+      <path d="M660 38 C670 36 676 32 680 26 C672 30 665 33 658 34 Z" fill="#2b3027" fill-opacity=".5" stroke="none"></path>
+      <path d="M150 38 C170 26 192 22 210 26 C190 32 172 38 156 42 Z" fill="#2b3027" fill-opacity=".4" stroke="none"></path>
+      <path d="M470 46 C490 56 512 58 530 54 C510 48 492 44 476 40 Z" fill="#2b3027" fill-opacity=".4" stroke="none"></path>
+      <use href="#orchB1" transform="translate(340,42) scale(.5)"></use>
+    </g>
+    <g id="osprig">
+      <use href="#orchB1" transform="scale(.55)"></use>
+      <path d="M14 28 C44 40 76 42 108 30 C78 48 44 46 16 34 Z" fill="#2b3027" fill-opacity=".55" stroke="none"></path>
+      <path d="M12 36 C36 50 62 54 88 48 C62 58 36 54 12 42 Z" fill="#2b3027" fill-opacity=".35" stroke="none"></path>
+    </g>
+  </defs>
+</svg>

@@ -1,13 +1,31 @@
 {% extends "base.html" %}
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block title %}Atelier{% endblock %}
+
+{% block page_class %}atelier-page{% endblock %}
 
 {% block content %}
+
+<div class="gallery-hero">
+  <div class="mist-blob" style="top:60px; right:-130px; width:520px; height:520px; background:radial-gradient(circle,rgba(232,216,199,.75),rgba(237,239,232,0) 70%);"></div>
+  <div class="section-eyebrow fade-in">collections of light</div>
+  <h1 class="fade-in">atelier</h1>
+  <svg viewBox="0 0 680 84" class="section-divider fade-in">
+    <use href="#ovine" filter="url(#wcLine)"></use>
+  </svg>
+</div>
+
 <div class="gallery" id="gallery">
     {% for photo in photos %}
-    <div class="item">
+    <a href="{% pageurl photo %}" class="item">
         {# Using 'width-1000' is faster than 'original' for galleries #}
         {% image photo.photo width-1000 %}
-    </div>
+        <div class="item-caption">
+          <span>{{ photo.title }}</span>
+          <span class="item-year">{{ photo.date_taken|date:"F, Y" }}</span>
+        </div>
+    </a>
     {% endfor %}
 </div>
 

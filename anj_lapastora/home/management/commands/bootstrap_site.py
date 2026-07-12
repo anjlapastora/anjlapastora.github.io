@@ -21,6 +21,12 @@ class Command(BaseCommand):
         if not homepage:
             self.stdout.write("Creating homepage...")
 
+            # A fresh Wagtail install seeds a demo page ("Welcome to your
+            # new Wagtail site!") at slug "home" under root. Remove it so
+            # it doesn't collide with our own homepage's slug.
+            root.get_children().filter(slug="home").delete()
+            root.refresh_from_db()
+
             homepage = HomePage(
                 title="Home",
                 slug="home",

@@ -1,10 +1,55 @@
 {% extends "base.html" %}
-{% load wagtailmarkdown %}
+{% load wagtailcore_tags wagtailimages_tags wagtailmarkdown %}
+
+{% block title %}{{ page.title }}{% endblock %}
 
 {% block content %}
 
-<div class="blog-body fade-in">
+<div class="article-header">
+  <a href="/musings" class="article-back fade-in">&larr; musings</a>
+  <div class="article-meta fade-in">
+    <span class="tag-label tag-musings">MUSINGS</span>
+    <span class="post-date">{{ page.date|date:"N j, Y" }}</span>
+  </div>
+  <h1 class="fade-in">{{ page.title }}</h1>
+</div>
+
+{% if page.main_image %}
+<div class="article-hero fade-in">
+  {% image page.main_image fill-1200x700 as hero_img %}
+  <img src="{{ hero_img.url }}" alt="{{ page.title }}">
+</div>
+{% endif %}
+
+<div class="blog-body">
   {{ page.body|markdown }}
 </div>
+
+{% with prev_page=page.get_prev_sibling next_page=page.get_next_sibling %}
+{% if prev_page.live or next_page.live %}
+<div class="article-nav">
+  {% if prev_page.live %}
+  <a href="{% pageurl prev_page %}" class="article-nav-card prev fade-in">
+    <span class="article-nav-arrow">&larr;</span>
+    <div>
+      <div class="article-nav-label">previous</div>
+      <div class="article-nav-title">{{ prev_page.title }}</div>
+    </div>
+  </a>
+  {% else %}
+  <div></div>
+  {% endif %}
+  {% if next_page.live %}
+  <a href="{% pageurl next_page %}" class="article-nav-card next fade-in">
+    <span class="article-nav-arrow">&rarr;</span>
+    <div>
+      <div class="article-nav-label">next</div>
+      <div class="article-nav-title">{{ next_page.title }}</div>
+    </div>
+  </a>
+  {% endif %}
+</div>
+{% endif %}
+{% endwith %}
 
 {% endblock %}

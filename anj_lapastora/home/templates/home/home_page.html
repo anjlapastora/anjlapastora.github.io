@@ -1,101 +1,114 @@
-{% load static %}
-{% load favicon_tags %}
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<!DOCTYPE html>
-<head>
-  {% favicon_meta %}
-  <title>{% block title %}Anj Lapastora{% endblock %}</title>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Cousine&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/instrument-serif" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<script>
-window.addEventListener("load", () => {
-  document.querySelectorAll(".fade-in").forEach(el => {
-    el.classList.add("visible");
-  });
-});
-</script>
-<body>
-<style>
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: block !important;
-    overflow: hidden !important;
-    background: #f3f3f3 !important;
-}
+{% block title %}Anj Lapastora{% endblock %}
 
-.wrapper {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-    z-index: 9999;
-}
+{% block page_class %}home-page{% endblock %}
 
-.title {
-  color: #A74d4a;
-  font-family: 'Instrument Serif', serif;
-  letter-spacing: -.03em;
-  font-size: clamp(50px, 12vw, 110px);
-  font-weight: 400;
-  margin-bottom: 40px;
-  line-height: 1;
-}
+{% block content %}
 
-.nav {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 45px !important; 
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+<div class="home-hero">
+  <div class="mist-blob" style="top:-120px; left:-100px; width:420px; height:420px; background:radial-gradient(circle,rgba(214,222,204,.9),rgba(237,239,232,0) 70%);"></div>
+  <div class="mist-blob" style="top:120px; right:-140px; width:460px; height:460px; background:radial-gradient(circle,rgba(232,216,199,.8),rgba(237,239,232,0) 70%); animation-direction:reverse;"></div>
 
-.nav a {
-  margin: 0 !important; 
-  padding: 0 0 15px 0 !important; 
-  width: 250px;
-  text-decoration: none !important;
-  text-align: center !important;
-  border-bottom: 1px solid rgba(167, 77, 74, 0.3);  
-}
+  <div class="home-orchid left">
+    <svg viewBox="0 0 420 560" style="width:100%; display:block;">
+      <use href="#stem1" filter="url(#ws1)" opacity=".22"></use>
+      <use href="#spray1" filter="url(#ws1)" opacity=".25"></use>
+      <use href="#stem1" filter="url(#wcS1)"></use>
+      <use href="#spray1" filter="url(#wc1)"></use>
+    </svg>
+  </div>
+  <div class="home-orchid right">
+    <svg viewBox="0 0 420 560" style="width:100%; display:block;">
+      <use href="#stem1" filter="url(#ws1)" opacity=".2"></use>
+      <use href="#spray1" filter="url(#ws1)" opacity=".22"></use>
+      <use href="#stem1" filter="url(#wcS1)"></use>
+      <use href="#spray1" filter="url(#wc1)"></use>
+    </svg>
+  </div>
 
-.nav a:hover {
-    border-bottom: 1px solid rgba(167, 77, 74, 1);
-    transition: border-color 0.3s ease;
-}
+  <div style="position:relative;">
+    <div class="home-hero-kicker fade-in">software engineer &middot; sunset lover &middot; wave chaser</div>
+    <h1 class="fade-in">drawn to golden light, open seas, and things that bloom <em>softly</em> </h1>
+    <p class="fade-in">A software engineer with a camera and a windowsill full of orchids. Photographs, field notes, and quiet thoughts on tech &amp; life. Best read with coffee, somewhere near the sea.</p>
+    <div class="home-hero-actions fade-in">
+      <a href="/atelier" class="btn btn-solid">wander the atelier</a>
+      <a href="/musings" class="btn btn-outline">read the musings</a>
+    </div>
+  </div>
 
-@media (max-width: 600px) {
-    .nav a {
-        width: 150px;
-    }
-}
-</style>
+  {% with hero_photo=recent_photos.0 %}
+  {% if hero_photo %}
+  <div class="home-hero-photo fade-in">
+    {% image hero_photo.photo fill-800x600 as hero_img %}
+    <img src="{{ hero_img.url }}" alt="{{ hero_photo.caption|default:hero_photo.title }}">
+    <div class="home-hero-photo-vignette"></div>
+    {% if hero_photo.caption %}
+    <div class="home-hero-caption">{{ hero_photo.caption|upper }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% endwith %}
+</div>
 
-  <main class="wrapper fade-in">
-    <h1 class="title fade-in" style="transition-delay: 0ms;">Anj Lapastora</h1>
-    <br>
-    <nav class="nav fade-in" style="transition-delay: 0.6s;">
-      <a href="/about">About</a>
-      <a href="/tech">Tech</a>
-      <a href="/atelier">Atelier</a>
-      <a href="/musings">Musings</a>
-    </nav>
+<div class="home-section">
+  <div class="home-section-head fade-in">
+    <h2>atelier</h2>
+    <a href="/atelier" class="more-link">collections of light &mdash; all photographs &rarr;</a>
+  </div>
+  <a href="/atelier" class="home-gallery-grid">
+    {% for photo in recent_photos %}
+      {% image photo.photo fill-500x400 as gimg %}
+      <img class="fade-in" src="{{ gimg.url }}" alt="{{ photo.caption|default:photo.title }}">
+    {% empty %}
+      <div class="placeholder fade-in">the atelier is warming up</div>
+    {% endfor %}
+  </a>
+</div>
 
-  </main>
+<div class="home-section home-journal">
+  <div class="home-journal-layout">
+    <div class="home-journal-intro fade-in">
+      <h2 style="font-family:var(--font-serif); font-weight:400; font-style:italic; font-size:44px; margin:0 0 12px;">journal</h2>
+      <p>Notes on tech &amp; life, written slowly.</p>
+    </div>
+    <div class="home-journal-list">
+      {% for post in recent_posts %}
+      <a href="{% pageurl post %}" class="home-journal-row fade-in">
+        <div>
+          <div class="post-title">{{ post.title }}</div>
+          {% if post.content_type.model == "techpostpage" %}
+          <span class="tag-label tag-tech">TECH</span>
+          {% else %}
+          <span class="tag-label tag-musings">MUSINGS</span>
+          {% endif %}
+        </div>
+        <span class="post-date">{{ post.date|date:"M j" }}</span>
+      </a>
+      {% empty %}
+      <p class="fade-in" style="color:var(--muted); font-size:14.5px;">new entries are on their way.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
-</body>
-</html>
+<div class="home-love">
+  <div class="home-love-mark fade-in">
+    <svg viewBox="-150 -110 300 220" style="width:100%; display:block;">
+      <use href="#orchB1" transform="scale(1.25)" filter="url(#wcMini)"></use>
+    </svg>
+  </div>
+  <h2 class="fade-in">a few things I love</h2>
+  <p class="fade-in">Orchids on the windowsill, sunflowers in August, gumamela from childhood mornings. Strong coffee, nature, and playlists that are at least half salsa. Come say hi</p>
+  <div class="tag-row fade-in">
+    <span class="tag-pill">experiences</span>
+    <span class="tag-pill">nature</span>
+    <span class="tag-pill">tech</span>
+    <span class="tag-pill accent">coffee, always</span>
+    <span class="tag-pill accent">music</span>
+    <span class="tag-pill">community</span>
+  </div>
+</div>
+
+{% endblock %}

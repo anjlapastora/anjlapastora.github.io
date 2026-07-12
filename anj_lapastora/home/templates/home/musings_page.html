@@ -1,52 +1,60 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailmarkdown %}
 
 {% block title %}Musings{% endblock %}
 
 {% block content %}
 
-<div class="blog-container fade-in">
-
-    {% for post in posts %}
-    <article class="card">
-
-        {% if post.main_image %}
-        {% image post.main_image fill-800x500 as img %}
-        <img src="{{ img.url }}" alt="{{ post.title }}">
-        {% endif %}
-
-        <p class="date">
-            {{ post.date|date:"n/j/y" }}
-        </p>
-
-        <h2>
-            <a href="{% pageurl post %}">
-                {{ post.title }}
-            </a>
-        </h2>
-
-        <p class="excerpt">
-            {{ post.intro|truncatewords:20 }}
-        </p>
-
-        <a href="{% pageurl post %}" class="read-more">
-            Read More
-        </a>
-
-    </article>
-    {% endfor %}
+<div class="journal-hero">
+  <div class="section-eyebrow fade-in">notes on life, written slowly</div>
+  <h1 class="fade-in">musings</h1>
+  <svg viewBox="0 0 680 84" class="section-divider fade-in">
+    <use href="#ovine" filter="url(#wcLine)"></use>
+  </svg>
 </div>
-<div class="pagination fade-in">
 
+{% if posts.number == 1 and posts.object_list.0 %}
+{% with featured=posts.object_list.0 %}
+<a href="{% pageurl featured %}" class="journal-featured">
+  {% if featured.main_image %}
+  {% image featured.main_image fill-700x500 as fimg %}
+  <img class="fade-in" src="{{ fimg.url }}" alt="{{ featured.title }}">
+  {% endif %}
+  <div class="fade-in">
+    <div class="journal-featured-meta">
+      <span class="tag-label tag-musings">FEATURED &middot; MUSINGS</span>
+      <span class="post-date">{{ featured.date|date:"M j" }}</span>
+    </div>
+    <div class="journal-featured-title">{{ featured.title }}</div>
+    <p class="journal-featured-excerpt">{{ featured.body|markdown|striptags|truncatewords:24 }}</p>
+    <span class="journal-read-more">read the entry &rarr;</span>
+  </div>
+</a>
+{% endwith %}
+{% endif %}
+
+<div class="blog-container">
+  {% for post in posts %}
+    {% if not forloop.first or posts.number != 1 %}
+    <article class="card fade-in">
+        <p class="date">{{ post.date|date:"M j" }}</p>
+        <span class="tag-label tag-musings">MUSINGS</span>
+        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+        <a href="{% pageurl post %}" class="read-more">read more &rarr;</a>
+    </article>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<div class="pagination fade-in">
     {% if posts.has_previous %}
-    <a href="?page={{ posts.previous_page_number }}">← Prev</a>
+    <a href="?page={{ posts.previous_page_number }}">&larr; prev</a>
     {% endif %}
 
-    <span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+    <span>page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
 
     {% if posts.has_next %}
-    <a href="?page={{ posts.next_page_number }}">Next →</a>
+    <a href="?page={{ posts.next_page_number }}">next &rarr;</a>
     {% endif %}
-
 </div>
 {% endblock %}
