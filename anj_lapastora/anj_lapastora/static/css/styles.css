@@ -1427,6 +1427,15 @@ code {
   color: var(--stone);
 }
 
+.about-portrait-photo {
+  display: block;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 200px 200px 12px 12px;
+  filter: saturate(.9) brightness(1.02);
+}
+
 .about-hero-caption {
   position: absolute;
   bottom: -13px;
@@ -1561,7 +1570,8 @@ code {
     grid-template-columns: 1fr;
   }
 
-  .about-portrait-placeholder {
+  .about-portrait-placeholder,
+  .about-portrait-photo {
     height: 380px;
   }
 }

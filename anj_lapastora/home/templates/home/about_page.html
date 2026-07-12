@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load wagtailimages_tags %}
 
 {% block title %}About{% endblock %}
 
@@ -6,7 +7,12 @@
 
 <div class="about-hero">
   <div class="about-hero-portrait fade-in">
+    {% if page.about_left %}
+    {% image page.about_left fill-800x1000 as portrait_img %}
+    <img class="about-portrait-photo" src="{{ portrait_img.url }}" alt="{{ page.title }}">
+    {% else %}
     <div class="about-portrait-placeholder">portrait &mdash; drop photo here</div>
+    {% endif %}
     <div class="about-hero-caption">SOMEWHERE NEAR THE SEA</div>
   </div>
 
