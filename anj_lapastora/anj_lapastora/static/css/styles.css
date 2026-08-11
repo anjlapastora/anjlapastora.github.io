@@ -972,7 +972,6 @@ img {
   height: 420px;
   object-fit: cover;
   display: block;
-  border-radius: 430px 430px 12px 12px;
   filter: saturate(.85) brightness(1.03);
 }
 
